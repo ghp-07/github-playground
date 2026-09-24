@@ -1,0 +1,46 @@
+name: 🐛 Bug 报告
+description: 报告一个可以复现的问题
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！请尽量把信息填完整，这能极大加快定位速度。
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 问题描述
+      description: 发生了什么？你期望发生什么？
+      placeholder: 我执行 X 的时候出现了 Y，但我期望的是 Z
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 一步一步写，让别人能照着复现出来
+      placeholder: |
+        1. 打开 ...
+        2. 点击 ...
+        3. 看到报错 ...
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: 版本 / 环境
+      placeholder: Windows 11, Git 2.55.0
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: 提交前确认
+      options:
+        - label: 我已经搜索过现有 Issue，确认不是重复的
+          required: true

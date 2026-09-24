@@ -1,0 +1,42 @@
+name: CI
+
+# ── 什么时候触发 ──────────────────────────────
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check:
+    name: 仓库结构与安全检查
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 拉取代码
+        uses: actions/checkout@v4
+
+      - name: 列出仓库文件
+        run: |
+          echo "===== 仓库文件 ====="
+          ls -la
+
+      - name: 检查必备文件是否存在
+        run: |
+          set -e
+          test -f README.md  && echo "✅ README.md 存在"
+          test -f .gitignore && echo "✅ .gitignore 存在"
+          test -f LICENSE    && echo "✅ LICENSE 存在"
+          echo "必备文件检查全部通过"
+
+      - name: 检查是否误提交了机密文件
+        run: |
+          if git ls-files | grep -qE '\.env$|\.key$|\.pem$|secrets\.json$'; then
+            echo "❌ 发现疑似机密文件已被提交，请立刻从历史中移除！"
+            git ls-files | grep -E '\.env$|\.key$|\.pem$|secrets\.json$'
+            exit 1
+          fi
+          echo "✅ 未发现机密文件"
+
+      - name: 统计提交数
+        run: echo "当前共 $(git rev-list --count HEAD) 条提交"
