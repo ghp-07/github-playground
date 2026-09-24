@@ -1,6 +1,6 @@
-# GitHub 练习场
+﻿# GitHub 练习场
 
-这是我的第一个 Git 仓库，用来走通 GitHub 的完整流程。
+这是我的第一个 Git 仓库 —— 由 feature/readme-a 分支改写。
 
 ## 这个仓库要练什么
 
